@@ -7,33 +7,41 @@ export default function Card({ city, country, isSet }) {
   const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
 
   useEffect(() => {
-    const fetchCord = async () => {
-      const response = await fetch(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${city},${country}&limit=1&appid=${apiKey}`
-      );
-      const cord = await response.json();
-      if (cord.length > 0) {
-        setCordinates({ lat: cord[0].lat, lon: cord[0].lon });
+    try {
+      const fetchCord = async () => {
+        const response = await fetch(
+          `http://api.openweathermap.org/geo/1.0/direct?q=${city},${country}&limit=1&appid=${apiKey}`
+        );
+        const cord = await response.json();
+        if (cord.length > 0) {
+          setCordinates({ lat: cord[0].lat, lon: cord[0].lon });
+        }
+      };
+      if (city && country) {
+        fetchCord();
       }
-    };
-    if (city && country) {
-      fetchCord();
+    } catch (error) {
+      console.log(error);
     }
   }, [city, country]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (cordinates.lat !== '' && cordinates.lon !== '') {
-        const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${cordinates.lat}&lon=${cordinates.lon}&appid=${apiKey}`
-        );
+    try {
+      const fetchData = async () => {
+        if (cordinates.lat !== '' && cordinates.lon !== '') {
+          const response = await fetch(
+            `https://api.openweathermap.org/data/2.5/weather?lat=${cordinates.lat}&lon=${cordinates.lon}&appid=${apiKey}`
+          );
 
-        const data = await response.json();
+          const data = await response.json();
 
-        setData(data);
-      }
-    };
-    fetchData();
+          setData(data);
+        }
+      };
+      fetchData();
+    } catch (error) {
+      console.log(error);
+    }
   }, [cordinates]);
   if (isSet) {
     return (

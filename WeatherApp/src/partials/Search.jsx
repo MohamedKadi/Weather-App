@@ -7,10 +7,14 @@ export default function Search() {
   const [isSet, setIsSet] = useState(false);
 
   function handleSubmit(event) {
-    event.preventDefault();
-    setCity(event.target.city.value);
-    setCountry(event.target.country.value);
-    setIsSet(true);
+    try {
+      event.preventDefault();
+      setCity(event.target.city.value);
+      setCountry(event.target.country.value);
+      setIsSet(true);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
