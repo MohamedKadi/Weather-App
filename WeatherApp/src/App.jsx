@@ -4,6 +4,7 @@ import Profile from './partials/Profile';
 import About from './partials/About';
 import Nav from './partials/Nav';
 import NotFound from './partials/NotFound';
+import Back from './partials/Back';
 import { RouterProvider, createBrowserRouter, Outlet } from 'react-router-dom';
 
 // Layout component
@@ -12,6 +13,7 @@ function Layout() {
     <>
       <Nav />
       <Outlet />
+      <Back />
     </>
   );
 }
