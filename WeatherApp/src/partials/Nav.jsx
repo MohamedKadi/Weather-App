@@ -1,7 +1,5 @@
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router';
-import Profile from './Profile';
-import About from './About';
 
 export default function Nav() {
   const nav = useNavigate();
@@ -18,7 +16,13 @@ export default function Nav() {
           </button>
         </li>
         <li>
-          <button onClick={() => nav('/')}>Profile</button>
+          <button
+            onClick={() =>
+              nav('/', { state: { message: 'Hello from the Home Page!' } })
+            }
+          >
+            Profile
+          </button>
         </li>
       </ul>
     </div>
